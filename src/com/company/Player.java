@@ -3,7 +3,15 @@ package com.company;
 public class Player {
 
     //Property to store player's name
-    public String Name;
+    private String Name;
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
 
     //Constructor
     public Player(String name)
@@ -13,6 +21,6 @@ public class Player {
 
     public void removeStone(int num)
     {
-        Game.RemoveStone(num);
+        Game.removeStone(num);
     }
 }

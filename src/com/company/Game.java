@@ -3,17 +3,33 @@ import java.util.Scanner;
 
 public class Game {
 
-    static int numberOfStones;
-    int upperBond;
+    private static int numberOfStones;
+    private int upperBond;
+
+    public static int getNumberOfStones() {
+        return numberOfStones;
+    }
+
+    public static void setNumberOfStones(int numberOfStones) {
+        Game.numberOfStones = numberOfStones;
+    }
+
+    public int getUpperBond() {
+        return upperBond;
+    }
+
+    public void setUpperBond(int upperBond) {
+        this.upperBond = upperBond;
+    }
 
     //Scanner object to read player's input
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     //Main method that starts the game and initializes the variables
-    public void StartGame(Player playerOne, Player playerTwo) {
+    public void startGame(Player playerOne, Player playerTwo) {
 
         //This variable returns an int of 1 or 2 to (We use this to determine who starts first)
-        int turnKeeper = Dice();
+        int turnKeeper = dice();
 
         //The upperBond has to be bigger than 0 we will prompt the user to enter a number > 0
         while(upperBond <= 0)
@@ -48,23 +64,23 @@ public class Game {
             if(turnKeeper == 1)
             {
                 //Print the stones left in the game
-                PrintStonesLeft();
-                PlayerTurn(playerOne);
+                printStonesLeft();
+                playerTurn(playerOne);
                 turnKeeper = 2;
             }
             else
             {
-                PrintStonesLeft();
-                PlayerTurn(playerTwo);
+                printStonesLeft();
+                playerTurn(playerTwo);
                 turnKeeper = 1;
             }
         }
     }
 
     //Takes a player object and handles the game's player turn
-    public void PlayerTurn(Player player) {
+    private void playerTurn(Player player) {
 
-        System.out.println(" "+player.Name + "'s turn - remove how many? ");
+        System.out.println(" "+player.getName() + "'s turn - remove how many? ");
         String input = scanner.next();
 
         try{
@@ -74,20 +90,19 @@ public class Game {
             {
                 System.out.println("Invalid number please try again ");
                 remove = scanner.nextInt();
-                continue;
             }
             //Else we will proceed with the game (removing the stone)
             player.removeStone(remove);
             //Check if there is a winner after removing stones.
-            CheckForWinner(player);
+            checkForWinner(player);
         }catch (NumberFormatException e)
         {
             System.out.println("Invalid number please try again ");
-            PlayerTurn(player);
+            playerTurn(player);
         }
     }
 
-    public void PrintStonesLeft() {
+    private void printStonesLeft() {
         System.out.print(numberOfStones + " stones left: ");
         for(int i = 0; i < numberOfStones; i++)
         {
@@ -95,22 +110,22 @@ public class Game {
         }
     }
 
-    public boolean CheckForWinner(Player player) {
+    private boolean checkForWinner(Player player) {
         if(numberOfStones == 0)
         {
             System.out.println("Game Over!");
-            System.out.println(player.Name + " 'Wins!");
+            System.out.println(player.getName() + " 'Wins!");
             upperBond = 0;
             return true;
         }
         return false;
     }
 
-    public static int RemoveStone(int num){
+    public static int removeStone(int num){
         return numberOfStones -= num;
     }
 
-    public void PlayAgain(Player playerOne, Player playerTwo) {
+    public void playAgain(Player playerOne, Player playerTwo) {
         System.out.println("Do you want to play again? (Y/N)");
         String input = scanner.next().toLowerCase();
 
@@ -120,13 +135,10 @@ public class Game {
             input = scanner.next().toLowerCase();
         }
         if(input.equals("y"))
-            StartGame(playerOne, playerTwo);
-        else if(input.equals("n"))
-            return;
-
+            startGame(playerOne, playerTwo);
     }
 
-    public int Dice() {
+    private int dice() {
         return (int)(Math.random()*2);
     }
 }

@@ -22,8 +22,8 @@ public class Main {
         Player player2 = new Player(playerName2);
 
         //Start game
-        game.StartGame(player1, player2);
+        game.startGame(player1, player2);
         //Ask if user wants to play again
-        game.PlayAgain(player1, player2);
+        game.playAgain(player1, player2);
     }
 }
