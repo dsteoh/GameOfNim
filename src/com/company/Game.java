@@ -6,22 +6,6 @@ public class Game {
     private static int numberOfStones;
     private int upperBond;
 
-    public static int getNumberOfStones() {
-        return numberOfStones;
-    }
-
-    public static void setNumberOfStones(int numberOfStones) {
-        Game.numberOfStones = numberOfStones;
-    }
-
-    public int getUpperBond() {
-        return upperBond;
-    }
-
-    public void setUpperBond(int upperBond) {
-        this.upperBond = upperBond;
-    }
-
     //Scanner object to read player's input
     private Scanner scanner = new Scanner(System.in);
 
